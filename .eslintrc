@@ -13,6 +13,12 @@
     "plugins": ["prettier"],
 
     "rules": {
-        "prettier/prettier": "error"
+        "linebreak-style": ["error", "windows"],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
     }
 }
