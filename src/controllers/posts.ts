@@ -9,6 +9,7 @@ import {
 import commentRoutes from './comments';
 
 import { PostType } from '../types/PostType';
+import { generateResponse } from '../handler/response';
 
 const router = express.Router({ mergeParams: true });
 
@@ -24,19 +25,19 @@ router.post('/', async (req: express.Request, res: express.Response) => {
 
 router.get('/:id', async (req: express.Request, res: express.Response) => {
     const post = await getPost(req.params.id);
-    if (!post) res.sendStatus(404).end();
+    if (!post) generateResponse(res, 404);
     res.send(post).end();
 });
 
 router.put('/:id', async (req: express.Request, res: express.Response) => {
     const post = await updatePost(req.params.id, req.body as PostType);
-    if (!post) res.sendStatus(404).end();
+    if (!post) generateResponse(res, 404);
     res.send(post).end();
 });
 
 router.delete('/:id', async (req: express.Request, res: express.Response) => {
     const post = await deletePost(req.params.postId);
-    if (!post) res.sendStatus(404).end();
+    if (!post) generateResponse(res, 404);
     res.sendStatus(204).end();
 });
 
