@@ -6,6 +6,8 @@ import {
     updatePost,
     deletePost,
 } from '../services/posts';
+import commentRoutes from './comments';
+
 import { PostType } from '../types/PostType';
 
 const router = express.Router({ mergeParams: true });
@@ -38,4 +40,5 @@ router.delete('/:id', async (req: express.Request, res: express.Response) => {
     res.sendStatus(204).end();
 });
 
+router.use('/:id/comments', commentRoutes);
 export default router;
