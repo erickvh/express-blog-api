@@ -1,11 +1,15 @@
 import express from 'express';
 import postRoutes from './controllers/posts';
 import mongoose from 'mongoose';
+import { validateContentType } from './middleware/validator';
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(validateContentType);
+
 app.use('/posts', postRoutes);
+
 app.all('*', function (req: express.Request, res: express.Response) {
     res.sendStatus(404);
 });
